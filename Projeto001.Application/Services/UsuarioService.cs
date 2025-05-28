@@ -15,26 +15,24 @@ namespace Projeto001.Application.Services
 
         public async Task<bool> AtualizarUsuario(Usuario pUsuario)
         {
-            Usuario usu = await _usuarioRepository.ConsultaPorId(pUsuario.Id);
+            Usuario? usu = await _usuarioRepository.ConsultaPorId(pUsuario.Id);
 
             if (usu is null)
                 return false;
 
-            usu.Username = pUsuario.Username;
-            usu.Senha = pUsuario.Senha;
+            usu.Username = string.IsNullOrWhiteSpace(pUsuario.Username) ? usu.Username : pUsuario.Username;
+            usu.Senha = string.IsNullOrWhiteSpace(pUsuario.Senha) ? usu.Senha : pUsuario.Senha;
             usu.Permissao = pUsuario.Permissao;
+            usu.AltSenha = pUsuario.AltSenha;
 
             await _usuarioRepository.AtualizarUsuario(usu);
 
             return true;
         }
 
-        public async Task<Usuario> ConsultaPorId(int pId)
+        public async Task<Usuario?> ConsultaPorId(int pId)
         {
-            Usuario usu = await _usuarioRepository.ConsultaPorId(pId);
-
-            if (usu is null)
-                throw new Exception("Usuário não encontrado!");
+            Usuario? usu = await _usuarioRepository.ConsultaPorId(pId);
 
             return usu;
         }
@@ -65,12 +63,9 @@ namespace Projeto001.Application.Services
             return usuarios;
         }
 
-        public async Task<Usuario> Login(string pUsuario, string pSenha)
+        public async Task<Usuario?> Login(string pUsuario, string pSenha)
         {
             Usuario? usuario = await _usuarioRepository.Login(pUsuario, pSenha);
-
-            if (usuario is null)
-                throw new Exception("Usuário ou senha incorretos.");
 
             return usuario;
         }

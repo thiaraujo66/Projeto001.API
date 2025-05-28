@@ -17,6 +17,32 @@ namespace Projeto001.Mapping.UsuarioMapping
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
                 .ForMember(dest => dest.Permissao, opt => opt.MapFrom(src => src.Permissao));
+
+            CreateMap<CriarUsuarioModel, Usuario>()
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
+                .ForMember(dest => dest.Senha, opt => opt.MapFrom(src => src.Senha))
+                .ForMember(dest => dest.Permissao, opt => opt.MapFrom(src => src.Permissao))
+                .ForMember(dest => dest.IdPessoa, opt => opt.MapFrom(src => src.IdPessoa));
+
+            CreateMap<Usuario, ListaUsuarioResponse>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
+                .ForMember(dest => dest.Permissao, opt => opt.MapFrom(src => src.Permissao));
+
+            CreateMap<Usuario, ConsultaUsuarioResponse>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
+                .ForMember(dest => dest.Permissao, opt => opt.MapFrom(src => src.Permissao))
+                .ForMember(dest => dest.AltSenha, opt => opt.MapFrom(src => src.AltSenha))
+                .ForMember(dest => dest.IdPessoa, opt => opt.MapFrom(src => src.IdPessoa));
+
+            CreateMap<AlterarUsuario, Usuario>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Username))
+                .ForMember(dest => dest.Permissao, opt => opt.MapFrom(src => src.Permissao))
+                .ForMember(dest => dest.AltSenha, opt => opt.MapFrom(src => src.AltSenha));
+
+
         }
     }
 }

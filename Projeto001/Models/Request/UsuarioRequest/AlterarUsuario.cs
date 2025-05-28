@@ -2,13 +2,15 @@
 
 namespace Projeto001.Models.Request.UsuarioRequest
 {
-    public class LoginModel
+    public class AlterarUsuario
     {
         [Required]
-        [MaxLength(80, ErrorMessage = "O campo Usuário deve ter no máximo 80 caracteres.")]
-        public string Username { get; set; } = string.Empty;
+        public int Id { get; set; }
 
-        [Required]
-        public string Senha { get; set; } = string.Empty;
+        [MaxLength(80, ErrorMessage = "O campo Usuário deve ter no máximo 80 caracteres.")]
+        public string Username { get; set; }
+
+        public int Permissao { get; set; }
+        public bool AltSenha { get; set; }
     }
 }

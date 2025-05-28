@@ -42,6 +42,10 @@ public partial class Endereco
     [Unicode(false)]
     public string Uf { get; set; }
 
+    [StringLength(100)]
+    [Unicode(false)]
+    public string Complemento { get; set; }
+
     [Column("Id_Pessoa")]
     public int? IdPessoa { get; set; }
 

@@ -21,7 +21,7 @@ namespace Projeto001.Infraestrutura.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Usuario> ConsultaPorId(int pId)
+        public async Task<Usuario?> ConsultaPorId(int pId)
         {
             return await _context.Usuarios.FindAsync(pId);
         }

@@ -7,6 +7,9 @@ using Projeto001.Domain.Interfaces.Repositories;
 using Projeto001.Domain.Interfaces.Services;
 using Projeto001.Infraestrutura.Data;
 using Projeto001.Infraestrutura.Repositories;
+using Projeto001.Mapping.ContatoMapping;
+using Projeto001.Mapping.EnderecoMapping;
+using Projeto001.Mapping.PessoaMapping;
 using Projeto001.Mapping.UsuarioMapping;
 using System.Text;
 
@@ -19,14 +22,10 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-
 builder.Services.AddDbContext<Projeto001Context>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+ConfigureDependencies(builder);
 ConfigureJWTApplication(builder);
 ConfigureSwagerAuth(builder);
 ConfigureAutoMapper(builder);
@@ -59,6 +58,9 @@ app.Run();
 static void ConfigureAutoMapper(WebApplicationBuilder builder) 
 {
     builder.Services.AddAutoMapper(typeof(UsuarioMapping));
+    builder.Services.AddAutoMapper(typeof(ContatoMapping));
+    builder.Services.AddAutoMapper(typeof(EnderecoMapping));
+    builder.Services.AddAutoMapper(typeof(PessoaMapping));
 }
 
 static void ConfigureJWTApplication(WebApplicationBuilder builder)
@@ -120,6 +122,28 @@ static void ConfigureSwagerAuth(WebApplicationBuilder builder)
             }
         });
     });
+}
+
+static void ConfigureDependencies(WebApplicationBuilder builder)
+{
+    #region [ Services ]
+
+    builder.Services.AddScoped<ITokenService, TokenService>();
+    builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+    builder.Services.AddScoped<IContatoService, ContatoService>();
+    builder.Services.AddScoped<IEnderecoService, EnderecoService>();
+    builder.Services.AddScoped<IPessoaService, PessoaService>();
+
+    #endregion
+
+    #region [ Repository ]
+
+    builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+    builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+    builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
+    builder.Services.AddScoped<IPessoaRepository, PessoaRepository>();
+
+    #endregion
 }
 
 #endregion

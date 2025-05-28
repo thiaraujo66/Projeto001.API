@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Projeto001.Domain.Enums
 {
@@ -6,6 +7,7 @@ namespace Projeto001.Domain.Enums
     {
         Administrador,
         Supervisor,
+        Funcionario,
         Usuario
     }
 }

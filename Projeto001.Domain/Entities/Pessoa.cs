@@ -33,7 +33,7 @@ public partial class Pessoa
     public DateTime DataNascimento { get; set; }
 
     [Column("RG")]
-    [StringLength(11)]
+    [StringLength(12)]
     [Unicode(false)]
     public string Rg { get; set; }
 
